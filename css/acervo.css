@@ -1,0 +1,80 @@
+/* Acervo: estante com livros (botões) e o livro 3D que sai da prateleira */
+.estante{display:flex;flex-direction:column;gap:14px}
+.estante-linha{position:relative;flex:1 1 0;min-height:0}
+/* a tábua da prateleira (os livros deslizam sobre ela) */
+.estante-linha::after{content:"";position:absolute;left:max(40px,4.5vw);right:max(40px,4.5vw);bottom:0;height:5px;border-radius:3px;background:#DCD8D0;box-shadow:0 6px 10px rgba(28,36,48,.08)}
+.estante-trilho{display:flex;align-items:flex-end;gap:34px;padding:0 6px 5px}
+.grupo{position:relative;flex:none;height:100%;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;scroll-snap-align:start}
+.grupo-nome{font:600 11px/1.2 ui-monospace,'SF Mono',Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--azul-escuro);white-space:nowrap}
+.grupo-livros{flex:1 1 0;min-height:0;display:flex;align-items:flex-end;gap:5px;padding-top:14px}
+.livro{position:relative;flex:none;width:var(--larg);height:calc(var(--alt) * 1%);padding:0;border:none;background:none;cursor:pointer;
+  opacity:0;transform:translateY(14px);transition:opacity 420ms ease,transform 520ms cubic-bezier(.2,.8,.2,1)}
+.chegou .livro{opacity:1;transform:none}
+.livro:hover .livro-lombada{transform:translateY(-6px)}
+.livro-lombada{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:8px 0;border:1.6px solid #DCD8D0;border-radius:4px 4px 2px 2px;background:#FFFFFF;
+  box-shadow:inset -6px 0 10px rgba(28,36,48,.05),2px 0 6px rgba(28,36,48,.06);transition:transform 200ms ease}
+.livro-faixa{width:70%;height:5px;border-radius:2px;background:#9FD8EE;flex:none}
+.livro.tom1 .livro-faixa{background:#DCD8D0}
+.livro.tom2 .livro-faixa{background:#3FB8E6}
+.livro.tom3 .livro-faixa{background:#E3F5FC;outline:1px solid #9FD8EE}
+.livro-tit{flex:1 1 0;min-height:0;overflow:hidden;writing-mode:vertical-rl;transform:rotate(180deg);font-size:12px;line-height:1.15;font-weight:500;color:var(--tinta);text-align:center;padding:6px 0;text-overflow:ellipsis}
+.livro:focus-visible{outline:2px solid var(--azul);outline-offset:3px}
+
+/* Livro fora da estante (3D) */
+.voo-palco{position:fixed;inset:0;z-index:2000;pointer-events:none;overflow:hidden}
+.voo-fundo{position:absolute;inset:0;background:rgba(255,255,255,.78);opacity:0;transition:opacity 400ms ease}
+.voo-palco.parado{pointer-events:auto}
+.voo-palco.claro .voo-fundo{opacity:1}
+.voo-palco.escondido{visibility:hidden}
+.voo-livro{position:absolute;left:0;top:0;transform-style:preserve-3d;transform-origin:50% 50%;will-change:transform;outline:none}
+.voo-palco.parado .voo-livro{cursor:pointer}
+.voo-livro:focus-visible .voo-capa{outline:1px solid var(--azul);outline-offset:2px}
+.voo-face{position:absolute;top:0;height:100%;backface-visibility:hidden}
+.voo-pagina,.voo-verso{left:0;width:100%}
+.voo-pagina{display:flex;flex-direction:column;gap:10%;padding:18% 14%;background:#FFFFFF;border:1px solid #E4E1DA;border-radius:2px 6px 6px 2px}
+.voo-pagina span{height:2px;border-radius:1px;background:#EEF2F5}
+.voo-capa-gira{position:absolute;inset:0;transform-style:preserve-3d;transform-origin:0 50%}
+.voo-capa,.voo-capa-dentro{left:0;width:100%}
+.voo-capa{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:16px 14px;border:1.6px solid #DCD8D0;border-radius:3px 8px 8px 3px;background:#FFFFFF;box-shadow:inset 8px 0 12px rgba(28,36,48,.06)}
+.voo-capa-dentro{transform:rotateY(180deg);background:#F6F4F0;border:1.6px solid #DCD8D0;border-radius:8px 3px 3px 8px}
+.voo-verso{background:#F4F2EE;border:1.6px solid #DCD8D0;border-radius:8px 3px 3px 8px}
+.voo-folhas{background:repeating-linear-gradient(90deg,#FFFFFF 0 2px,#EDEAE4 2px 3px);border:1px solid #DCD8D0}
+.voo-lado .livro-lombada{position:absolute;inset:0}
+.capa-faixa{width:100%;height:6px;border-radius:3px;background:#3FB8E6;flex:none}
+.capa-faixa.baixo{margin-top:auto;background:#9FD8EE}
+.capa-grupo{font:600 9px/1.2 ui-monospace,'SF Mono',Menlo,Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--azul-escuro)}
+.capa-tit{font-size:15px;line-height:1.2;font-weight:500;color:var(--tinta)}
+.capa-sub{font-size:11px;color:var(--legenda)}
+.voo-dica{position:absolute;left:0;right:0;bottom:calc(var(--barra) - 10px);text-align:center;font-style:italic;font-weight:500;font-size:16px;color:var(--azul-escuro);opacity:0;transition:opacity 300ms ease}
+.voo-voltar{position:absolute;left:50%;bottom:calc(var(--barra) - 64px);transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:none;border-radius:999px;background:#FFFFFF;color:var(--azul-escuro);font-size:14px;cursor:pointer;box-shadow:6px 6px 14px var(--sombra),-6px -6px 14px var(--luz);opacity:0;pointer-events:none;transition:opacity 300ms ease}
+.voo-palco.parado .voo-dica{opacity:1;animation:pisca-lento 3s ease-in-out infinite}
+.voo-palco.parado .voo-voltar{opacity:1;pointer-events:auto}
+
+/* No Acervo a estante entra deslizando e os livros já aparecem (sem a cascata do zoom) */
+.modo-deslizar .livro{opacity:1;transform:none}
+
+/* Livro aberto */
+.livro-topo{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.livro-meta{font:600 12px/1.4 ui-monospace,'SF Mono',Menlo,Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--azul-escuro)}
+.livro-janela h3{margin:14px 0 0;font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--azul-escuro)}
+.livro-aulas{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;counter-reset:aula}
+.livro-aula{display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:10px 14px;border:1px solid #E4E1DA;border-radius:14px;background:#FFFFFF;text-align:left;font-size:15px;line-height:1.35;color:var(--tinta);cursor:pointer;transition:box-shadow 200ms ease,border-color 200ms ease}
+.livro-aula svg{flex:none;color:var(--azul)}
+.livro-aula:hover{border-color:#C9C5BC}
+.livro-aula.on{border-color:transparent;color:var(--azul-escuro);box-shadow:inset 4px 4px 10px rgba(var(--sombra-rgb),.45),inset -4px -4px 10px var(--luz)}
+.livro-player{display:flex;flex-direction:column;gap:8px;scroll-margin-top:80px}
+.livro-video{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#1C2430}
+.livro-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.livro-video-rodape{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;font-size:15px}
+.livro-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:var(--azul-escuro);font-weight:500;text-decoration:none}
+.livro-link:hover{color:#073F55}
+.livro-nota{font-size:13px !important;color:var(--legenda) !important}
+@media (max-width:760px){
+  .estante{gap:10px}
+  .estante-trilho{gap:22px}
+  .livro{width:calc(var(--larg) * .8)}
+  .livro-tit{font-size:10.5px}
+  .grupo-nome{font-size:9.5px}
+  .estante-linha::after{left:30px;right:30px}
+}
+@media (prefers-reduced-motion:reduce){.livro{transition:opacity 200ms ease;transform:none}}

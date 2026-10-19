@@ -1,0 +1,25 @@
+/* Feed de Novidades (19/10): faixa de filtros preta, 1 linha + botão Menu branco; trava embaixo da tela ao rolar */
+:root{--filtro-h:60px;--filtro-margem:max(24px,4.5vw);--filtro-base:42px} /* base: acima da aba da barra (30 px) quando a barra se esconde ao rolar */
+.feed-nov{padding-bottom:0}
+.feed-fim{flex:none;height:60vh}
+.filtros.filtros-nov{position:sticky;top:calc(100vh - var(--filtro-h) - var(--filtro-base));top:calc(100dvh - var(--filtro-h) - var(--filtro-base));z-index:3;
+  flex-wrap:nowrap;align-items:center;gap:10px;height:var(--filtro-h);padding:10px 10px 10px 12px;border-radius:20px;background:#111418;
+  box-shadow:0 14px 34px rgba(0,0,0,.28);
+  width:calc(var(--vw-util,100vw) - 2 * var(--filtro-margem));margin-left:calc(50% - (var(--vw-util,100vw) - 2 * var(--filtro-margem)) / 2)}
+.filtros-linha{flex:1 1 auto;min-width:0;height:40px;overflow:hidden;display:flex;flex-wrap:wrap;gap:8px}
+.filtros-nov .chip{flex:none;background:transparent;color:#E8ECF0;border-color:rgba(255,255,255,.24)}
+.filtros-nov .chip:hover{border-color:rgba(255,255,255,.55)}
+.filtros-nov .chip.on{background:#3FB8E6;border-color:#3FB8E6;color:#062B3A;font-weight:500}
+.filtros-nov .chip:focus-visible,.filtros-menu:focus-visible{outline:2px solid #3FB8E6;outline-offset:2px}
+.filtros-menu{position:relative;flex:none;width:46px;height:40px;display:flex;align-items:center;justify-content:center;padding:0;border:none;border-radius:12px;background:#FFFFFF;color:#111418;cursor:pointer}
+.filtros-menu:hover{background:#EEF2F5}
+.filtros-menu[aria-expanded="true"]{box-shadow:inset 3px 3px 8px rgba(0,0,0,.25)}
+.filtros-menu.marcado::after{content:"";position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:#3FB8E6}
+/* Todas as opções: abre para cima da faixa (a faixa fica embaixo da tela) */
+.filtros-painel{position:absolute;right:0;bottom:calc(100% + 10px);width:min(560px,100%);max-height:50vh;overflow:auto;display:flex;flex-wrap:wrap;gap:8px;padding:14px;border-radius:18px;background:#111418;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.filtros-painel[hidden]{display:none}
+@media (max-width:760px){
+  :root{--filtro-h:56px;--filtro-margem:16px}
+  .filtros.filtros-nov{padding:8px 8px 8px 10px;gap:8px;border-radius:18px}
+  .filtros-nov .chip{min-height:40px;font-size:13.5px;padding:0 12px}
+}

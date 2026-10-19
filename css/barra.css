@@ -1,0 +1,40 @@
+/* Barra de baixo, aba da seta, Início, afundar/emergir, luz amarela */
+/* Barra */
+.wrap{position:fixed;left:50%;bottom:var(--barra);transform:translate(-50%,50%);z-index:10;max-width:calc(100% - 32px);transition:transform 540ms cubic-bezier(.65,0,.35,1)}
+/* A placa junta aba de cima + barra + aba Início numa só peça; a sombra segue o contorno do conjunto */
+.placa{display:flex;flex-direction:column;align-items:center;max-width:100%;filter:drop-shadow(8px 8px 10px rgba(var(--sombra-rgb),.55)) drop-shadow(-8px -8px 10px var(--luz))}
+.barra{display:flex;gap:6px;padding:8px;border-radius:28px;background:var(--fundo);overflow-x:auto;scrollbar-width:none;max-width:100%}
+.aba-topo{display:flex;align-items:center;justify-content:center;width:72px;height:30px;padding:0;border:none;border-radius:18px 18px 0 0;background:linear-gradient(to top,var(--fundo) 0%,rgba(255,255,255,.2) 100%);color:#4A4740;cursor:pointer;margin-bottom:-1px}
+/* A seta acompanha a cor do texto do botão Início (cinza, ou azul quando o Início está selecionado) */
+.aba-topo.cor-inicio-ativo{color:var(--azul-escuro)}
+.aba-topo:focus-visible{outline:2px solid var(--azul);outline-offset:3px}
+.aba-topo svg{transition:transform 320ms cubic-bezier(.3,.7,.3,1)}
+.aba-topo.cima svg{transform:rotate(180deg)}
+.barra::-webkit-scrollbar{display:none}
+.barra-btn{position:relative;flex-shrink:0;width:84px;height:68px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0;border:none;border-radius:20px;background:var(--fundo);cursor:pointer;color:#4A4740;transition:box-shadow 220ms ease,color 220ms ease}
+.barra-btn:hover{box-shadow:4px 4px 10px rgba(var(--sombra-rgb),.5),-4px -4px 10px var(--luz)}
+.barra-btn.ativo,.barra-btn.ativo:hover{box-shadow:inset 5px 5px 12px rgba(var(--sombra-rgb),.62),inset -5px -5px 12px var(--luz);color:var(--azul-escuro)}
+.rotulo{font-size:12.5px;line-height:1;transition:opacity 700ms ease}
+/* Troca de perfil: os botões afundam na superfície da barra, em cascata, e os novos emergem dela */
+.barra-btn.afunda{animation:afunda 300ms cubic-bezier(.5,0,.75,0) forwards;pointer-events:none}
+.barra-btn.emerge{animation:emerge 540ms cubic-bezier(.2,.8,.3,1) both;pointer-events:none}
+@keyframes afunda{
+  0%{transform:scale(1);opacity:1;box-shadow:0 0 0 rgba(0,0,0,0)}
+  40%{transform:scale(.95);opacity:1;box-shadow:inset 5px 5px 12px rgba(var(--sombra-rgb),.62),inset -5px -5px 12px var(--luz)}
+  100%{transform:scale(.45);opacity:0;box-shadow:inset 2px 2px 4px rgba(var(--sombra-rgb),.3),inset -2px -2px 4px var(--luz)}}
+@keyframes emerge{
+  0%{transform:scale(.45);opacity:0;box-shadow:inset 2px 2px 4px rgba(var(--sombra-rgb),.3),inset -2px -2px 4px var(--luz)}
+  40%{transform:scale(.92);opacity:1;box-shadow:inset 5px 5px 12px rgba(var(--sombra-rgb),.62),inset -5px -5px 12px var(--luz)}
+  75%{transform:scale(1.05);opacity:1;box-shadow:6px 6px 14px rgba(var(--sombra-rgb),.55),-6px -6px 14px var(--luz)}
+  100%{transform:scale(1);opacity:1;box-shadow:0 0 0 rgba(0,0,0,0)}}
+.discreto .barra-btn:not(.ativo) .rotulo{opacity:.35}
+.barra-btn:hover .rotulo,.barra-btn:focus-visible .rotulo{opacity:1 !important}
+.ponto{position:absolute;top:9px;right:14px;width:7px;height:7px;border-radius:50%;background:var(--azul)}
+.pulsa{animation:pulso 1.1s ease-out 2}
+/* Luz amarela em volta do Novidades enquanto as cartas estão abertas */
+.barra-btn.brilho,.barra-btn.brilho:hover{box-shadow:0 0 12px 2px rgba(255,200,40,.45),0 0 28px 8px rgba(255,190,20,.22);animation:brilho 1.8s ease-in-out infinite}
+@keyframes brilho{0%,100%{box-shadow:0 0 10px 1px rgba(255,200,40,.38),0 0 24px 6px rgba(255,190,20,.16)}50%{box-shadow:0 0 16px 4px rgba(255,200,40,.55),0 0 36px 12px rgba(255,190,20,.26)}}
+@keyframes pulso{0%{box-shadow:0 0 0 0 rgba(0,163,224,.5)}100%{box-shadow:0 0 0 14px rgba(0,163,224,0)}}
+.inicio-btn{display:inline-flex;align-items:center;gap:6px;margin-top:-1px;height:34px;padding:0 16px;border:none;border-radius:0 0 18px 18px;background:var(--fundo);font-size:12.5px;color:#4A4740;cursor:pointer;transition:box-shadow 220ms ease,color 220ms ease}
+.inicio-btn:hover{color:var(--tinta)}
+.inicio-btn.ativo,.inicio-btn.ativo:hover{box-shadow:inset 4px 4px 10px rgba(var(--sombra-rgb),.62),inset -4px -4px 10px var(--luz);color:var(--azul-escuro)}

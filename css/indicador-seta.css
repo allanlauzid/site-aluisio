@@ -1,0 +1,52 @@
+/* Desenho e animação da seta do indicador (variante Q em uso) */
+/* ---- Indicador de rolagem: família "rabisco" (seta desenhada à mão) — variações D a K ---- */
+.ind{display:none;border:none;background:none;padding:0;font:inherit;cursor:pointer;color:var(--tinta)}
+body[data-ind="d"] .ind-d,body[data-ind="j"] .ind-j,body[data-ind="l"] .ind-l,body[data-ind="m"] .ind-m,body[data-ind="n"] .ind-n,body[data-ind="o"] .ind-o,body[data-ind="p"] .ind-p,body[data-ind="q"] .ind-q{display:inline-flex}
+.rab-texto{font-style:italic;font-weight:500;font-size:17px;color:var(--azul-escuro);white-space:nowrap}
+.rabisco{position:relative;display:block;flex:none}
+.rabisco svg{display:block;overflow:visible}
+.rab-traco{fill:none;stroke:var(--azul);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:100;stroke-dashoffset:100;animation:rab-desenha 2.4s ease-in-out infinite}
+/* A ponta da seta anda junto com a ponta do traço, desde o início (segue o mesmo caminho) */
+.rab-ponta{position:absolute;left:0;top:0;width:14px;height:14px;color:var(--azul);offset-anchor:78% 50%;offset-rotate:auto;offset-distance:0%;animation:rab-ponta 2.4s ease-in-out infinite}
+.rab-ponta svg path{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+@keyframes rab-desenha{0%{stroke-dashoffset:100;opacity:1}55%,85%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes rab-ponta{0%{offset-distance:0%;opacity:1}55%,85%{offset-distance:100%;opacity:1}100%{offset-distance:100%;opacity:0}}
+.atraso-1{animation-delay:.15s}.atraso-2{animation-delay:.3s}
+/* D: curva suave descendo ao lado do texto */
+.ind-d{align-items:flex-end;gap:4px}
+.ind-d .rab-texto{margin-bottom:62px;transform:rotate(-6deg)}
+/* P: mesmo desenho da D, com os tracinhos da M */
+.ind-p{align-items:flex-end;gap:4px}
+.ind-p .rab-texto{margin-bottom:100px;transform:rotate(-6deg);animation:pisca-lento 3s ease-in-out infinite}
+/* Nítido 60% do ciclo, esmaecendo/voltando 40%: o texto fica nítido 50% mais tempo do que apagado */
+@keyframes pisca-lento{0%,60%{opacity:1}80%{opacity:.25}100%{opacity:1}}
+/* No P o tracejado para antes da ponta: a seta chega ao fim e a linha fica um pouco atrás, deixando um espaço */
+.ind-p .rab-mascara{animation-name:rab-desenha-p}
+@keyframes rab-desenha-p{0%{stroke-dashoffset:100;opacity:1}55%,85%{stroke-dashoffset:9;opacity:1}100%{stroke-dashoffset:9;opacity:0}}
+.ind-p .rab-pontos{stroke-dashoffset:-7}
+/* Q: igual à P, mas a saída apaga a seta da cauda para a cabeça (a ponta some por último) */
+.ind-q{align-items:flex-end;gap:4px}
+.ind-q .rab-texto{margin-bottom:100px;transform:rotate(-6deg);animation:pisca-lento 3s ease-in-out infinite}
+.ind-q .rab-pontos{stroke-dashoffset:-7}
+.ind-q .rab-mascara{stroke-linecap:butt;stroke-dasharray:100 200;animation:rab-desenha-q 2.8s ease-in-out infinite}
+.ind-q .rab-ponta{animation:rab-ponta-q 2.8s ease-in-out infinite}
+/* Apagar começa logo depois de a seta chegar (55%) e dura mais (até 96%); ciclo total continua 2,8 s */
+@keyframes rab-desenha-q{0%{stroke-dasharray:100 200;stroke-dashoffset:100}50%,55%{stroke-dasharray:100 200;stroke-dashoffset:9}96%,100%{stroke-dasharray:0 200;stroke-dashoffset:-91}}
+@keyframes rab-ponta-q{0%{offset-distance:0%;opacity:1}50%,93%{offset-distance:100%;opacity:1}100%{offset-distance:100%;opacity:0}}
+/* Família pontilhada (J, L, M, N, O): o traço vai sendo revelado ao longo da curva */
+.ind-j,.ind-l,.ind-m,.ind-n,.ind-o{align-items:center;gap:4px}
+.ind-j .rab-texto,.ind-l .rab-texto,.ind-m .rab-texto,.ind-n .rab-texto,.ind-o .rab-texto{transform:rotate(-6deg);margin-bottom:24px}
+.rab-pontos{fill:none;stroke:var(--azul);stroke-width:3.2;stroke-linecap:round;stroke-dasharray:.1 7}
+.rab-mascara{fill:none;stroke:#FFFFFF;stroke-width:10;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100;animation:rab-desenha 2.4s ease-in-out infinite}
+/* L: pontos maiores e mais espaçados */
+.rab-pontos.grandes{stroke-width:5.4;stroke-dasharray:.1 11}
+/* M: tracinhos curtos em vez de pontos */
+.rab-pontos.tracos{stroke-width:2.6;stroke-dasharray:5 6}
+/* N: pontilhado com um laço no caminho */
+/* O: pontilhado em S, com os pontos caminhando para baixo depois de desenhados */
+.rab-pontos.caminham{animation:caminham .8s linear infinite}
+@keyframes caminham{to{stroke-dashoffset:-7.1}}
+/* 19/10: texto numa pílula branca com contorno tracejado azul claro (mesmos tracinhos da seta) */
+.ind-q .rab-texto{position:relative;background:var(--fundo);padding:5px 14px;border-radius:999px;box-shadow:0 3px 8px rgba(11,95,128,.18)}
+.rab-pilula{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.rab-pilula rect{fill:none;stroke:#3FB8E6;stroke-width:2.6;stroke-linecap:round;stroke-dasharray:5 6}

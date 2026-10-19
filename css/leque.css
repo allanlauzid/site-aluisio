@@ -1,0 +1,15 @@
+/* Leque de destaques que sai do botão Novidades */
+/* Leque de Novidades */
+.leque{position:absolute;left:50px;bottom:calc(100% + 14px);width:0;height:0;transform-origin:0 0}
+.carta{position:absolute;left:0;bottom:0;width:152px;padding:0;border:1px solid #E4E1DA;border-radius:14px;background:#FFFFFF;overflow:hidden;text-align:left;cursor:pointer;color:var(--tinta);box-shadow:0 12px 32px rgba(28,36,48,.14);transform-origin:50% 100%;opacity:0;pointer-events:none}
+.carta:hover{box-shadow:0 16px 40px rgba(28,36,48,.2)}
+.carta-img{height:78px;background:#E8E5DE;display:flex;align-items:center;justify-content:center}
+.carta-img{position:relative;overflow:hidden}
+.carta-img img{width:100%;height:100%;object-fit:cover;display:block}
+.carta-txt{padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px}
+.carta-rot{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--azul-escuro)}
+/* Setas para passar os destaques: mesma seta da aba da barra, dentro de uma bola branca */
+.leque-seta{position:absolute;left:0;bottom:64px;width:32px;height:32px;margin-left:-16px;display:flex;align-items:center;justify-content:center;padding:0;border:none;border-radius:50%;background:#FFFFFF;color:#4A4740;cursor:pointer;box-shadow:0 4px 14px rgba(28,36,48,.16);opacity:0;pointer-events:none;z-index:20}
+.leque-seta:hover{color:var(--azul-escuro)}
+.leque-seta:focus-visible{outline:2px solid var(--azul);outline-offset:3px}
+.carta-tit{font-size:13px;line-height:1.35;font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}

@@ -1,0 +1,83 @@
+Protótipo do site de Aluísio — versão de trabalho (19/10/2026)
+
+Como abrir
+- Dê dois cliques em index.html. Abre em qualquer navegador, sem internet e sem instalar nada.
+
+Onde fica cada coisa
+- index.html ............ só a estrutura da página (avatar, notch, barra) e a lista dos arquivos abaixo.
+
+- js/conteudo/ .......... O TEXTO DO SITE. É aqui que se preenche e edita o conteúdo.
+    perfis.js ........... nomes dos perfis e quais botões aparecem na barra de cada um.
+    capitulos.js ........ cada botão: nome, itens em volta do avatar, ilustração de fundo, caixa de rolagem.
+    posts.js ............ publicações do feed de Novidades (fav: true = vai para o leque de destaques;
+                           img = imagem em img/posts/; fotoX = X vermelho na foto; avisos = tags vermelhas de análise).
+  Os arquivos são .js (e não .json) para o site continuar abrindo com dois cliques, sem servidor.
+
+- js/desenhos/ .......... ícones e ilustrações em SVG.
+    icones.js ........... ícones da barra, do contato e das setas.
+    figuras.js .......... desenhos pequenos dos itens em volta do avatar (Tabler Icons, licença MIT, tabler.io/icons).
+    cenas.js ............ ilustrações atrás do avatar (MOCK).
+
+- js/app/ ............... o comportamento do site (não tem textos).
+    estado.js, barra.js, leque.js, perfis.js, capitulos.js, orbita.js, post.js, indicador.js, avatar.js, atualizar.js, iniciar.js.
+    avatar.js ........... vídeo do avatar do perfil Profissional (toca/pausa; imagem parada no Safari/iPhone e com "reduzir movimento").
+    orbita.js ........... Contato: ícones girando em volta da cabeça; rolar a página acelera o giro
+                           (ajustes no topo do arquivo: volta, maxVezes, forca, curva, apagar).
+
+- img/posts/ ............ imagens das publicações do feed (tiradas do LinkedIn do Aluísio; mock para análise).
+- img/avatar/ ........... vídeo do Aluísio (perfil Profissional) em WebM com fundo transparente, versão grande e _m (celular),
+                           e a imagem parada (pose) em WebP. Os buracos do recorte já foram corrigidos.
+- img/icones/ ........... ícones do Contato em WebP: linkedin, instagram e facebook (Vecteezy.com) e email
+                           (desenhado para o site no mesmo estilo).
+
+- css/ .................. a aparência, um arquivo por parte do site. A ordem no index.html importa
+                           (cada arquivo pode ajustar o anterior):
+    base.css (fonte, cores, medidas) · palco.css · notch.css · capitulos.css · orbita.css · barra.css · leque.css ·
+    indicador.css · conteudo.css (feed e página do post) · celular.css · movimento-reduzido.css · indicador-seta.css
+
+- intro/ ................ a intro (intro.js + intro.css): assinatura de Aluísio sendo escrita em branco sobre azul claro,
+                           o fundo vira uma bola, a bola cai e o site aparece. Roda só na primeira visita da sessão
+                           (para ver de novo, abra numa aba nova); qualquer tecla, clique ou toque acelera 2x;
+                           não roda com "reduzir movimento" ligado.
+- fontes/ ............... a fonte IBM Plex Sans (regular, média, seminegrito e itálico).
+                           Licença livre (SIL Open Font License) no arquivo de licença ao lado.
+
+Desempenho
+- Os scripts usam "defer": o navegador baixa todos em paralelo, sem travar a página, e roda na ordem certa.
+- Quando o site estiver publicado, o navegador guarda cada arquivo em cache: mudar um post só faz o visitante
+  baixar de novo o posts.js, não o site inteiro.
+
+Observações
+- O avatar ainda é uma silhueta provisória; os textos e posts são exemplos.
+- Ilustrações atrás do avatar e desenhos dos itens em volta dele são MOCK (provisórios), só para sinalizar o
+  assunto de cada botão.
+- As palavras em volta do avatar entram com efeito de letreiro de aeroporto (só as letras giram).
+- Para ajustar rapidamente a altura da barra e as margens do avatar, edite no topo de css/base.css as variáveis
+  --barra (altura da barra a partir da base), --mtopo e --mbase (margens do avatar).
+
+19/10 — Projetos, Acervo e botão X
+- Projetos: ao rolar, a câmera passa pelo Aluísio e aparece a grade de projetos (js/conteudo/projetos.js — hoje 8 MOCK).
+- Acervo: ao rolar, a estante entra da direita; cada item de js/conteudo/acervo.js vira um livro (cursos em js/conteudo/cursos.js).
+  Clique no livro: vai para o centro; clique de novo para abrir.
+- Carimbo vermelho MOCK = conteúdo inventado ou provisório (tire "mock: true" do item quando for real).
+- Botão X azul claro (canto superior direito, depois de rolar): volta ao topo do capítulo.
+- Arquivos novos: js/app/{camera,rolo,mock,projetos,acervo,voltar-topo}.js e css/{camera,mock,projetos,acervo,voltar-topo}.css.
+
+19/10 — Perfis Pessoal e Religioso (MOCK) e Contato no peito
+- Pessoal (boné): barra com Feed, Calendário, Fotos e Vídeos. Religioso (cruz): Feed, Mensagens, Teologia, Atuação pastoral, Contato.
+- Tudo é exemplo (carimbo MOCK). Textos em js/conteudo/mocks-perfis.js; "fotos" desenhadas em js/desenhos/artes.js.
+  Calendário: setas trocam o mês, clique no dia mostra os eventos. Fotos e vídeos abrem numa janela (Esc ou X fecha).
+  Vídeo e áudio são de mentira: a barra anda e as frases curtas aparecem, só para mostrar o funcionamento.
+- Contato: os ícones agora giram em volta do peito, num círculo um pouco maior (ajuste em GIRO, no topo de js/app/orbita.js).
+- Arquivos novos: js/desenhos/artes.js, js/conteudo/mocks-perfis.js, js/app/mocks-perfis.js, css/mocks-perfis.css.
+
+19/10 — Painel administrativo e app (PWA)
+- Endereço secreto: index.html#admin (no site publicado: https://.../#admin). Aparece só um campo.
+  Aceita a senha provisória (hoje: aluisio) ou o código de 6 dígitos do app autenticador de um celular cadastrado.
+- Dentro: botão "Site" (canto superior esquerdo) volta ao site · "Bem-vindo, [apelido]" · seções de cada perfil,
+  Barra e botões, Imagens (converte para WebP), Checagem antes de publicar, Celulares (TOTP), Senha, Acessos.
+- SEM BANCO DE DADOS AINDA: edições ficam como rascunho só no navegador; celulares e senha também ficam só no aparelho.
+  Não é seguro para publicar assim: a conferência do código precisa ir para o servidor (Supabase) — ver admin/config.js.
+- App: manifest.webmanifest + sw.js + ícones em img/app/. Só funciona no site publicado (https). Instale a partir de /#admin:
+  o app abre direto no painel. Visitantes comuns não veem a opção de instalar.
+- Arquivos: admin/{config,totp,banco,pwa,painel}.js, admin/admin.css, admin/vendor/qrcode.js (QR code, licença MIT, Kazuhiko Arase).

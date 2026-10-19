@@ -1,0 +1,34 @@
+/* Itens em volta do avatar, letreiro e ilustração atrás do avatar */
+/* Informações em volta do avatar */
+.info-esq,.info-dir{position:absolute;top:30%;display:flex;flex-direction:column;gap:36px;z-index:3}
+.info-esq{right:calc(50% + 19vh);align-items:flex-end;text-align:right}
+.info-dir{left:calc(50% + 19vh);align-items:flex-start;text-align:left}
+.info-item{opacity:0;transform:translateY(14px);transition:opacity 420ms ease,transform 520ms cubic-bezier(.2,.8,.2,1)}
+.info-item.on{opacity:1;transform:none}
+.info-big{font-size:40px;line-height:1.05;font-weight:600;letter-spacing:-0.01em}
+.info-cap{font-size:14px;line-height:1.4;color:var(--legenda);max-width:200px}
+.contato-btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px 0 14px;border:none;border-radius:999px;background:var(--fundo);font-size:15px;font-weight:500;color:var(--tinta);cursor:pointer;box-shadow:6px 6px 14px var(--sombra),-6px -6px 14px var(--luz)}
+/* Ilustração do capítulo, atrás do avatar (MOCK provisório: desenhos de referência, a substituir) */
+.fundo-cap{position:absolute;left:50%;top:50%;width:min(100vw,128vh);aspect-ratio:680/440;transform:translate(-50%,-56%);opacity:0;transition:opacity 500ms ease;pointer-events:none}
+.fundo-cap.on{opacity:1}
+.fundo-cap svg{display:block;width:100%;height:100%}
+/* Item em volta do avatar: desenho + palavra (letreiro de aeroporto, só as letras) + legenda */
+.info-esq.com-fig{align-items:flex-start;text-align:left}
+.info-dir.com-fig{align-items:flex-end;text-align:right}
+.info-item.fig{display:flex;align-items:center;gap:14px}
+.info-dir .info-item.fig{flex-direction:row-reverse}
+.info-fig{flex:0 0 auto;width:62px;height:62px;border-radius:50%;background:#E3F5FC;color:var(--azul-escuro);display:flex;align-items:center;justify-content:center}
+.info-fig svg{width:30px;height:30px}
+.letreiro{font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;font-size:28px;font-weight:600;letter-spacing:.04em;white-space:nowrap}
+.letreiro .ch{display:inline-block;min-width:.62em;text-align:center}
+.letreiro .ch.gira{color:var(--azul)}
+.info-txt{text-shadow:0 0 4px #FFFFFF,0 0 8px #FFFFFF,0 0 14px #FFFFFF}
+.info-item.fig .info-cap{opacity:0;transition:opacity 400ms ease}
+.info-item.fig.pronto .info-cap{opacity:1}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+a.contato-btn{text-decoration:none}
+.contato-btn:active{box-shadow:inset 4px 4px 10px rgba(var(--sombra-rgb),.6),inset -4px -4px 10px var(--luz)}
+
+/* 19/10: espaço entre palavras do letreiro (não gira; no celular deixa a palavra quebrar em duas linhas) */
+.letreiro .ch.esp{display:inline;min-width:0}
+.letreiro .pal{white-space:nowrap}

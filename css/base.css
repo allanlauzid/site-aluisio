@@ -1,0 +1,26 @@
+/* Fonte (pasta fontes/), variáveis de cor e medidas, reset */
+/* Fonte IBM Plex Sans servida da pasta fontes/ (funciona sem internet) */
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:400;font-display:swap;src:url('../fontes/ibm-plex-sans-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:500;font-display:swap;src:url('../fontes/ibm-plex-sans-latin-500-normal.woff2') format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:600;font-display:swap;src:url('../fontes/ibm-plex-sans-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'IBM Plex Sans';font-style:italic;font-weight:500;font-display:swap;src:url('../fontes/ibm-plex-sans-latin-500-italic.woff2') format('woff2')}
+
+/* Ajustes rápidos: altura da barra (a partir da base) e margens do avatar */
+:root{
+  --barra:20%;
+  --mtopo:11%;
+  --mbase:4%;
+  --fundo:#FFFFFF;
+  --tinta:#1C2430;
+  --legenda:#5E6672;
+  --azul:#00A3E0;
+  --azul-escuro:#0B5F80;
+  --sombra-rgb:150,150,150;
+  --luz:#FFFFFF;
+  --sombra:rgba(var(--sombra-rgb),.58);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--fundo)}
+body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--tinta);-webkit-tap-highlight-color:transparent}
+button{font:inherit}
+.foco:focus-visible,.barra-btn:focus-visible,.inicio-btn:focus-visible,.carta:focus-visible,.indicador:focus-visible{outline:2px solid var(--azul);outline-offset:3px}

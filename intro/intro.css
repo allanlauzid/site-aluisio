@@ -1,0 +1,24 @@
+/* Intro do site (ver intro.js). Fica por cima de tudo até a bola sair da tela. */
+html.intro-rodando, html.intro-rodando body { overflow: hidden; }
+/* 19/10: antes de a intro aparecer, a tela já fica azul claro e o site escondido (evita a "piscada" do Aluísio e da barra) */
+html.intro-rodando:not(.intro-montada) { background: #3FB8E6; }
+html.intro-rodando:not(.intro-montada) body { visibility: hidden; }
+.intro { position: fixed; inset: 0; z-index: 1000; pointer-events: auto; cursor: default; }
+.intro-branco { position: absolute; inset: 0; background: #FFFFFF; }
+
+/* fundo azul claro: cobre a tela e se contrai num círculo em volta da assinatura */
+.intro-fundo { position: absolute; inset: 0; background: #3FB8E6; clip-path: circle(var(--raio, 150vmax) at var(--cx, 50%) var(--cy, 50%)); }
+
+.intro-palco { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.intro-assinatura { width: min(300px, 62vw); height: auto; overflow: visible; }
+#intro-tinta path { fill: #FFFFFF; }
+.intro-pena { fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+.intro-bloqueio { fill: none; stroke: #000; stroke-linecap: butt; stroke-linejoin: round; }
+.intro-final { display: none; }
+.intro.pronto .intro-final { display: inline; }
+.intro.pronto .intro-escrita { display: none; }
+.intro-bola { position: absolute; border-radius: 50%; background: #3FB8E6; display: none; align-items: center; justify-content: center; will-change: transform; }
+.intro-bola svg { display: block; overflow: visible; }
+.intro-bola use { fill: #FFFFFF; }
+.intro.bola .intro-bola { display: flex; }
+.intro.bola .intro-fundo, .intro.bola .intro-palco { visibility: hidden; }

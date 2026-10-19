@@ -1,0 +1,50 @@
+/* Mock da caminhada: regras restritas à Trajetória. */
+.traj-espaco{height:1500vh;pointer-events:none}
+.traj-andando #conteudo{pointer-events:none}
+.traj-camada{position:absolute;inset:0;z-index:4;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .35s;background:#fff}
+.traj-andando .traj-camada{opacity:1}
+.traj-andando .avatar-box,.traj-andando .sombra,.traj-andando #fundo-cap{visibility:hidden}
+.traj-andando .info-esq,.traj-andando .info-dir{top:11%;gap:10px;z-index:6;pointer-events:none}
+.traj-andando .info-esq{left:5%;right:auto;align-items:flex-start;text-align:left}
+.traj-andando .info-dir{right:5%;left:auto;align-items:flex-end;text-align:right}
+.traj-andando .info-fig{width:28px;height:28px}.traj-andando .info-fig svg{width:16px;height:16px}
+.traj-andando .letreiro{font-size:12px}.traj-andando .info-cap{display:none}
+.traj-texto{position:absolute;left:9%;top:27%;width:min(38%,470px);pointer-events:auto}
+.traj-ano{font-size:clamp(32px,4vw,62px);font-weight:400;line-height:1.05;color:#0B5F80;letter-spacing:-.04em}
+.traj-palavra{font:500 13px/1.5 Consolas,monospace;letter-spacing:.12em;color:#0B5F80;margin:18px 0 10px}
+.traj-texto h2{font-size:clamp(22px,2.2vw,32px);line-height:1.16;margin:0 0 10px;font-weight:500}
+.traj-cargo{color:#5E6672;font-size:16px;margin:0 0 12px}
+.traj-resumo{font-size:17px;line-height:1.5;margin:0;max-width:410px}
+.traj-aviso{display:inline-block;color:#a62029;background:#fff1f2;font-size:11px;padding:3px 9px;border-radius:8px;margin-top:12px}
+.traj-explorar{display:flex;align-items:center;gap:10px;border:0;border-radius:30px;background:white;color:#1C2430;padding:10px 16px;min-height:44px;margin-top:17px;cursor:pointer;box-shadow:4px 4px 12px #00000012,-4px -4px 12px white}
+.traj-explorar:before{content:'+';display:grid;place-items:center;color:white;background:#DF3F49;width:22px;height:22px;border-radius:50%}
+.traj-camada button:focus-visible,.traj-modal button:focus-visible{outline:2px solid #00A3E0;outline-offset:4px}
+.traj-mundo{position:absolute;left:0;top:0;width:16000px;height:600px;will-change:transform}
+.traj-mundo svg{width:16000px;height:600px;overflow:visible}
+.traj-mundo{pointer-events:none}.traj-texto{text-shadow:0 0 7px white,0 0 12px white}
+.traj-pessoa{position:absolute;width:130px;height:320px;left:0;top:0;transform-origin:50% 100%;will-change:transform}
+.traj-pessoa svg{width:100%;height:100%;overflow:visible}
+.traj-perna,.traj-braco{transform-box:fill-box;transform-origin:50% 0}
+.traj-status{position:absolute;left:9%;right:9%;bottom:9%;display:flex;align-items:center;gap:15px;color:#5E6672;font-size:12px;pointer-events:auto}
+.traj-trilho{height:2px;flex:1;background:#e3f5fc;overflow:hidden}.traj-progresso{height:100%;background:#00a3e0;transform-origin:left;transform:scaleX(0)}
+.traj-status button{border:0;background:transparent;color:#0b5f80;min-height:44px;padding:6px 10px;cursor:pointer}
+.traj-modal{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#fff;color:#1c2430;z-index:1000;overscroll-behavior:contain}
+.traj-modal::backdrop{background:#fff}
+.traj-modal-interior{max-width:780px;margin:0 auto;padding:100px 28px 70px}
+.traj-fechar{position:fixed;right:24px;top:22px;min-height:44px;border:0;border-radius:30px;padding:10px 20px;background:white;box-shadow:3px 3px 14px #0002;color:#0b5f80;cursor:pointer}
+.traj-modal h2{font-size:32px;font-weight:500;line-height:1.2}.traj-modal p{line-height:1.65;white-space:pre-line}
+.traj-modal-meta{font-size:14px;color:#0b5f80}.traj-modal-nota{color:#a62029;font-size:13px}
+@media(max-width:760px){
+ .traj-espaco{height:1700vh}
+ .traj-andando .info-esq,.traj-andando .info-dir{top:9%;gap:6px}
+ .traj-andando .info-esq{left:16px}.traj-andando .info-dir{right:16px}
+ .traj-andando .info-fig{width:21px;height:21px}.traj-andando .info-fig svg{width:13px;height:13px}.traj-andando .letreiro{font-size:10px}
+ .traj-texto{left:7%;top:20%;width:86%}.traj-ano{font-size:34px}.traj-palavra{font-size:10px;margin:9px 0 5px}
+ .traj-texto h2{font-size:21px;margin-bottom:6px}.traj-cargo{font-size:13px;margin-bottom:7px}.traj-resumo{font-size:14px;line-height:1.4;max-width:100%}
+ .traj-explorar{margin-top:9px;font-size:12px;padding:5px 12px}.traj-aviso{margin-top:7px;font-size:10px}
+ .traj-status{left:5%;right:5%;bottom:3%;gap:4px;font-size:10px}.traj-status button{padding:5px}
+ .traj-modal-interior{padding:86px 23px 50px}.traj-modal h2{font-size:26px}
+}
+@media(prefers-reduced-motion:reduce){
+ .traj-espaco{height:auto}.traj-camada{display:none}.traj-estatica{position:relative;z-index:5;background:white;padding:40px 7%;max-width:900px;margin:auto}.traj-estatica article{padding:28px 0;border-bottom:1px solid #dcd8d0}.traj-estatica h2{font-size:23px}.traj-estatica button{min-height:44px;border:1px solid #dcd8d0;border-radius:25px;background:white;padding:9px 18px;color:#0b5f80}
+}

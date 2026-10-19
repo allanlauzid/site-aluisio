@@ -1,0 +1,36 @@
+/* Ajustes para telas de até 760 px */
+@media (max-width:760px){
+  .info-esq,.info-dir{top:9%;gap:16px}
+  .info-esq{right:auto;left:16px;align-items:flex-start;text-align:left}
+  .info-dir{left:auto;right:16px;align-items:flex-end;text-align:right}
+  .info-big{font-size:22px}
+  .info-cap{font-size:12.5px;max-width:130px}
+  .info-esq.com-fig,.info-dir.com-fig{top:12.5%}
+  .info-fig{width:34px;height:34px}.info-fig svg{width:20px;height:20px}
+  .info-item.fig{gap:6px}
+  .letreiro{font-size:14px}
+  .info-item.fig .info-cap{font-size:11.5px}
+  .barra{gap:4px;padding:6px}
+  .barra-btn{width:58px;height:60px}
+  .rotulo{font-size:11px}
+  .contato-btn{min-height:44px;font-size:14px;padding:0 14px 0 10px}
+  .indicador-pos{left:auto;right:16px}
+  /* 19/10: no celular, os 4 itens ficam numa linha acima da cabeça (desenho em cima da palavra) e sem legendas,
+     para não cobrir o rosto do Aluísio; o avatar desce um pouco para abrir espaço */
+  /* 19/10 04h50 (pedido de Allan): Aluísio 5% mais alto no celular — altura de 81% para 85% da tela (81 × 1,05),
+     com os pés no mesmo lugar (antes: --mtopo 15%) */
+  :root{--mtopo:10.95%}
+  .info-esq.com-fig,.info-dir.com-fig{top:36px;width:calc(50% - 19px);flex-direction:row;align-items:flex-start;justify-content:space-around;gap:6px;text-align:center}
+  .info-esq.com-fig{left:16px}
+  .info-dir.com-fig{right:16px}
+  .info-item.fig,.info-dir .info-item.fig{flex:1 1 0;min-width:0;flex-direction:column;align-items:center;gap:4px;text-align:center}
+  .info-item.fig .info-cap{display:none}
+  .info-item.fig .letreiro{font-size:11px}
+  .info-fig{width:30px;height:30px}.info-fig svg{width:18px;height:18px}
+  /* 19/10 (corrigido 04h45): capítulo com 6 itens (Acervo): a fila de cima fica igual aos outros botões (2 + 2);
+     só os 2 que sobrariam por cima do Aluísio vão para os lados dele, na altura da cabeça. O Aluísio NUNCA muda de tamanho. */
+  .seis .letreiro{white-space:normal;line-height:1.2}
+  .info-esq.com-fig.seis .info-item.fig:nth-child(3),.info-dir.com-fig.seis .info-item.fig:nth-child(3){position:absolute;top:118px;width:96px;flex:none}
+  .info-esq.com-fig.seis .info-item.fig:nth-child(3){left:-10px}
+  .info-dir.com-fig.seis .info-item.fig:nth-child(3){right:-10px}
+}

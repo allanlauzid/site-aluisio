@@ -1,0 +1,19 @@
+/* Palco: cena que gira, avatar e sombra */
+/* Palco */
+#raiz{position:relative;min-height:100vh}
+.palco{perspective:1400px;position:sticky;top:0;height:100vh;height:100dvh;min-height:560px;overflow:hidden;z-index:1}
+/* A perspectiva fica no palco (e não dentro do transform), senão o eixo deslocado amplia a cena */
+.cena{position:absolute;inset:0;transform-origin:50% 50% -30vw;transform:none}
+.sombra{position:absolute;left:50%;bottom:calc(var(--mbase) - 1.3vh);width:22vh;height:2.6vh;transform:translateX(-50%);border-radius:50%;background:rgba(28,36,48,.10);filter:blur(6px)}
+/* Altura = tela menos as duas margens; largura sai da proporção do corpo (200 x 580) */
+.avatar-box{position:absolute;left:50%;transform:translateX(-50%);top:var(--mtopo);height:calc(100% - var(--mtopo) - var(--mbase));aspect-ratio:700/1758}
+/* 19/10: vídeo do Profissional (proporção 700 x 1758); a imagem parada fica por baixo até o vídeo começar a tocar */
+.avatar-midia{position:relative;width:100%;height:100%}
+.avatar-midia[hidden]{display:none}
+.avatar-pose,.avatar-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;user-select:none}
+.avatar-video{opacity:0;transition:opacity 300ms ease}
+.avatar-midia.tocando .avatar-video{opacity:1}
+.avatar-midia.tocando .avatar-pose{visibility:hidden}
+.avatar-btn{display:block;width:100%;height:100%}
+.avatar-btn svg{width:100%;height:100%;display:block}
+.avatar-btn svg[hidden]{display:none}

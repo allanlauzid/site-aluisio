@@ -1,0 +1,8 @@
+/* Quem ativou "reduzir movimento" no sistema */
+@media (prefers-reduced-motion: reduce){
+  .barra-btn.afunda{animation:none;opacity:0}.barra-btn.emerge{animation:none}
+  .carta,.cena,.info-item,.fundo-cap{transition:opacity 200ms ease !important}
+  .notch-wrap{transition:none}
+  .pulsa,.ind,.ind *{animation:none !important}
+  .rab-traco,.rab-mascara{animation:none !important;stroke-dashoffset:0}.rab-ponta{animation:none !important;offset-distance:100%}
+}

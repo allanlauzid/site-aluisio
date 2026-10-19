@@ -1,0 +1,9 @@
+/* Contato: botões-ícone girando em volta da cabeça de Aluísio (posição calculada em js/app/orbita.js) */
+.avatar-box{z-index:2}  /* os ícones de trás (z 1) passam por trás do avatar; os da frente (z 3), por cima */
+.orbita{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 500ms ease}
+.orbita.on{opacity:1}
+.orbita-btn{position:absolute;left:0;top:0;display:block;padding:0;border:none;border-radius:50%;background:none;cursor:pointer;pointer-events:auto;will-change:transform;
+  filter:drop-shadow(0 6px 10px rgba(28,36,48,.22))}
+.orbita-btn img{display:block;width:100%;height:100%;pointer-events:none;user-select:none}
+.orbita-btn:hover{filter:drop-shadow(0 8px 14px rgba(28,36,48,.32)) brightness(1.06)}
+.orbita-btn:focus-visible{outline:3px solid var(--azul);outline-offset:3px}

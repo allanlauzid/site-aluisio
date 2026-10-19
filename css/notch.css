@@ -1,0 +1,18 @@
+/* Notch de perfis (topo) e aba com círculo */
+/* Balões de perfil */
+/* ---- Notch de perfis: preso no topo, centralizado, com aba para esconder/expandir ---- */
+.notch-wrap{position:fixed;top:0;left:50%;z-index:12;transform:translate(-50%,0);transition:transform 520ms cubic-bezier(.65,0,.35,1)}
+.notch-placa{display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 8px 10px rgba(var(--sombra-rgb),.5))}
+.notch{display:flex;gap:6px;padding:8px 12px 8px;background:var(--fundo);border-radius:0 0 26px 26px}
+.perfil-btn{width:66px;height:56px;display:flex;align-items:center;justify-content:center;padding:0;border:none;border-radius:16px;background:var(--fundo);color:#3A3833;cursor:pointer;transition:box-shadow 220ms ease,color 220ms ease}
+.perfil-btn svg{width:36px;height:36px;display:block;overflow:visible;transition:transform 240ms cubic-bezier(.2,.8,.2,1),filter 240ms ease}
+.perfil-btn .acento{stroke:var(--azul)}
+.perfil-btn:hover{box-shadow:4px 4px 10px rgba(var(--sombra-rgb),.5),-4px -4px 10px var(--luz)}
+/* Perfil atual: botão afundado e ícone em alto relevo */
+.perfil-btn.atual,.perfil-btn.atual:hover{box-shadow:inset 5px 5px 12px rgba(var(--sombra-rgb),.62),inset -5px -5px 12px var(--luz);color:var(--azul-escuro)}
+.perfil-btn.atual svg{transform:scale(1.1);filter:drop-shadow(1.4px 1.8px 1.2px rgba(var(--sombra-rgb),.85)) drop-shadow(0 6px 8px rgba(0,163,224,.22))}
+.perfil-btn:focus-visible,.aba-notch:focus-visible{outline:2px solid var(--azul);outline-offset:3px}
+.aba-notch{display:flex;align-items:center;justify-content:center;width:72px;height:26px;margin-top:-1px;padding:0;border:none;border-radius:0 0 18px 18px;background:var(--fundo);cursor:pointer}
+/* Círculo: vazio com o notch escondido, azul claro com ele expandido (a cor entra/sai só depois do movimento) */
+.circulo{width:12px;height:12px;border-radius:50%;border:2px solid #9AA6B2;background:transparent;transition:background-color 260ms ease,border-color 260ms ease}
+.aba-notch.cheio .circulo{background:#8FDAF5;border-color:#3FB8E6}

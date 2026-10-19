@@ -1,0 +1,8 @@
+/* Botão X azul claro (#3FB8E6): volta ao topo do capítulo. Só aparece depois de rolar */
+.voltar-topo{position:fixed;top:20px;right:20px;z-index:30;width:44px;height:44px;display:flex;align-items:center;justify-content:center;padding:0;border:none;border-radius:50%;background:#3FB8E6;color:#FFFFFF;cursor:pointer;
+  box-shadow:0 6px 16px rgba(11,95,128,.28);opacity:0;transform:scale(.6);pointer-events:none;transition:opacity 260ms ease,transform 320ms cubic-bezier(.2,.8,.3,1.3)}
+.voltar-topo.on{opacity:1;transform:none;pointer-events:auto}
+.voltar-topo:hover{background:#2BA9DA}
+.voltar-topo:active{box-shadow:inset 3px 3px 8px rgba(11,95,128,.4)}
+@media (max-width:760px){.voltar-topo{top:14px;right:14px;width:40px;height:40px}}
+@media (prefers-reduced-motion:reduce){.voltar-topo{transition:opacity 200ms ease;transform:none}}

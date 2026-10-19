@@ -1,0 +1,135 @@
+/* PAINEL ADMINISTRATIVO (index.html#admin) — mesma fonte e o azul claro #3FB8E6 do site.
+   Enquanto o painel está aberto, o site fica escondido por baixo (não pisca antes do painel aparecer). */
+html.modo-admin,html.modo-admin body{overflow:hidden}
+html.modo-admin body{visibility:hidden}
+#admin{visibility:visible;position:fixed;inset:0;z-index:1000;background:#F6F8FA;color:var(--tinta,#1C2430);font-family:'IBM Plex Sans',system-ui,sans-serif}
+#admin[hidden]{display:none}
+#admin *{box-sizing:border-box}
+#admin button,#admin input,#admin textarea{font:inherit;color:inherit}
+#admin :focus-visible{outline:2px solid #3FB8E6;outline-offset:2px}
+
+/* Tela de acesso: só o campo */
+#admin.adm-login{display:flex;align-items:center;justify-content:center;background:#3FB8E6;padding:24px}
+.adm-campo{width:100%;max-width:300px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.adm-campo input{width:100%;height:58px;padding:0 20px;border:none;border-radius:999px;background:#FFFFFF;font-size:22px;letter-spacing:.18em;text-align:center;box-shadow:0 14px 34px rgba(11,95,128,.28)}
+.adm-campo input::placeholder{letter-spacing:.04em;color:#9AA8B3}
+.adm-campo input:focus{outline:3px solid rgba(255,255,255,.7);outline-offset:3px}
+.adm-campo .adm-msg{min-height:20px;margin:0;color:#FFFFFF;font-size:14px;text-align:center}
+.adm-campo.erro{animation:adm-tremor 380ms ease}
+@keyframes adm-tremor{20%{transform:translateX(-10px)}40%{transform:translateX(9px)}60%{transform:translateX(-6px)}80%{transform:translateX(3px)}}
+
+/* Painel */
+#admin.adm-painel{display:flex;flex-direction:column}
+.adm-topo{flex-shrink:0;height:60px;display:flex;align-items:center;gap:14px;padding:0 16px;padding-top:env(safe-area-inset-top);background:#FFFFFF;border-bottom:1px solid #E6EAEE}
+.adm-site{height:40px;padding:0 18px;border:none;border-radius:999px;background:#3FB8E6;color:#FFFFFF !important;font-weight:600;cursor:pointer}
+.adm-site:hover{background:#2FA8D6}
+.adm-ola{flex:1;font-size:15px;color:#4A5260;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.adm-ola strong{color:var(--tinta,#1C2430);font-weight:600}
+.adm-sair{height:40px;padding:0 14px;border:1px solid #E1E5EA;border-radius:999px;background:#FFFFFF;cursor:pointer;font-size:14px}
+.adm-corpo{flex:1;min-height:0;display:flex}
+.adm-menu{width:240px;flex-shrink:0;overflow:auto;padding:16px 12px 40px;background:#FFFFFF;border-right:1px solid #E6EAEE}
+.adm-grupo{display:flex;flex-direction:column;gap:2px;margin-bottom:14px}
+.adm-grupo-nome{padding:6px 12px;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:#0B5F80}
+.adm-item{position:relative;display:flex;align-items:center;gap:8px;min-height:38px;padding:0 12px;border:none;border-radius:10px;background:transparent;text-align:left;font-size:14.5px;cursor:pointer}
+.adm-item:hover{background:#F1F5F8}
+.adm-item.on{background:#E3F4FB;color:#0B5F80;font-weight:600}
+.adm-ponto{width:7px;height:7px;border-radius:50%;background:#F2A33A;margin-left:auto}
+.adm-main{flex:1;min-width:0;overflow:auto;padding:28px 32px 80px;outline:none}
+.adm-main > *{max-width:860px}
+
+.adm-cab{position:relative;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
+.adm-cab-grupo{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#0B5F80}
+.adm-cab h1{margin:4px 0 0;font-size:28px;font-weight:600;letter-spacing:-.01em}
+.adm-cab p{margin:6px 0 0;color:#5E6672;font-size:15px;line-height:1.5}
+.adm-cab .carimbo-mock{flex-shrink:0;margin-top:6px}
+.adm-h2{margin:26px 0 10px;font-size:18px;font-weight:600}
+.adm-txt{margin:0 0 14px;font-size:15px;line-height:1.55;color:#3A4250}
+.adm-aviso{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:#EAF6FC;border:1px solid #CBE9F6;font-size:14.5px;line-height:1.5}
+.adm-aviso.atencao{background:#FFF6E8;border-color:#F6D9A8}
+.adm-aviso.ok{background:#EDF8F0;border-color:#C6E8CF}
+.adm-aviso a,.adm-link{color:#0B5F80;font-weight:500}
+.adm-vazio{color:#7A828E;font-size:14.5px}
+
+.adm-btn{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 14px;border:1px solid #DCE1E6;border-radius:999px;background:#FFFFFF;font-size:14px;cursor:pointer;text-decoration:none;color:inherit;white-space:nowrap}
+.adm-btn:hover{border-color:#3FB8E6}
+.adm-btn.azul{background:#3FB8E6;border-color:#3FB8E6;color:#FFFFFF;font-weight:500}
+.adm-btn.perigo:hover{border-color:#D93025;color:#B3261E}
+.adm-btn[data-certeza]{border-color:#D93025;background:#FDECEA;color:#B3261E}
+.adm-btn:disabled{opacity:.5;cursor:not-allowed}
+.adm-ico{width:34px;height:34px;border:1px solid #DCE1E6;border-radius:50%;background:#FFFFFF;cursor:pointer}
+.adm-ico:disabled{opacity:.35;cursor:default}
+.adm-acoes{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 16px}
+.adm-rasc{font-size:13px;color:#A56A12;background:#FFF6E8;padding:4px 10px;border-radius:999px}
+
+.adm-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.adm-card{display:flex;flex-direction:column;gap:4px;padding:18px;border-radius:16px;background:#FFFFFF;border:1px solid #E6EAEE}
+.adm-card span{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#0B5F80}
+.adm-card strong{font-size:20px;font-weight:600}
+.adm-card small{font-size:13.5px;color:#5E6672;line-height:1.45}
+.adm-card .adm-btn,.adm-card .adm-link{align-self:flex-start;margin-top:6px}
+
+.adm-lista,.adm-disp,.adm-simples,.adm-achados,.adm-imgs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.adm-lista li,.adm-disp li{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:12px 14px;border-radius:14px;background:#FFFFFF;border:1px solid #E6EAEE}
+.adm-li-txt,.adm-disp li > div:first-child{flex:1;min-width:200px;display:flex;flex-direction:column;gap:2px}
+.adm-li-txt strong,.adm-disp strong{font-weight:500;font-size:15px}
+.adm-li-txt small,.adm-disp small{font-size:13px;color:#6A727E}
+.adm-li-acoes{display:flex;gap:6px;flex-wrap:wrap}
+.adm-tag-mock{font:700 11px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;color:#D93025;border:1.5px dashed #D93025;border-radius:5px;padding:4px 6px}
+.adm-tag-aviso{font-size:12px;color:#B3261E;background:#FDECEA;border:1px solid #F1B5B0;border-radius:999px;padding:3px 9px;white-space:nowrap}
+.adm-simples li{padding:10px 14px;border-radius:12px;background:#FFFFFF;border:1px solid #E6EAEE;font-size:14.5px}
+.adm-simples small{color:#6A727E;margin-left:6px}
+
+.adm-form{display:flex;flex-direction:column;gap:14px;padding:22px;border-radius:18px;background:#FFFFFF;border:1px solid #E6EAEE;margin-bottom:16px}
+.adm-form.estreito{max-width:440px}
+.adm-form h2{margin:0;font-size:18px;font-weight:600}
+.adm-f{display:flex;flex-direction:column;gap:6px}
+.adm-f > span{font-size:13px;font-weight:500;color:#4A5260}
+.adm-f em{font-style:normal;color:#8A929E;font-weight:400}
+.adm-f input,.adm-f textarea,.adm-inline input{width:100%;padding:10px 12px;border:1px solid #DCE1E6;border-radius:10px;background:#FBFCFD;font-size:15px;line-height:1.5}
+.adm-f textarea{resize:vertical}
+.adm-json{font-family:ui-monospace,Menlo,Consolas,monospace !important;font-size:12.5px !important}
+.adm-check{display:flex;align-items:center;gap:8px;font-size:14.5px}
+.adm-check input{width:18px;height:18px;accent-color:#3FB8E6}
+.adm-msg{margin:0;min-height:18px;font-size:14px;color:#B3261E}
+.adm-msg.ok{color:#1E7A3A}
+.adm-inline{display:flex;gap:8px;align-items:center;width:100%;max-width:420px}
+.adm-inline input{flex:1}
+
+.adm-setup-caixa{margin-top:6px;padding:22px;border-radius:18px;background:#FFFFFF;border:2px dashed #3FB8E6}
+.adm-setup-caixa h2{margin:0 0 12px;font-size:18px;font-weight:600}
+.adm-setup-grade{display:grid;grid-template-columns:220px 1fr;gap:22px;align-items:start}
+.adm-setup-grade p{margin:0 0 10px;font-size:14.5px;line-height:1.5}
+.adm-qr{width:220px;height:220px;padding:6px;border-radius:12px;background:#FFFFFF;border:1px solid #E6EAEE}
+.adm-qr svg{width:100%;height:100%;display:block}
+.adm-chave{display:inline-block;margin:0 6px 12px 0;padding:8px 10px;border-radius:8px;background:#F1F5F8;font:500 14px/1.4 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.06em;word-break:break-all}
+
+.adm-upload{display:inline-flex;margin-bottom:14px}
+.adm-upload input{position:absolute;width:1px;height:1px;opacity:0}
+.adm-upload span{display:inline-flex;align-items:center;min-height:42px;padding:0 18px;border-radius:999px;background:#3FB8E6;color:#FFFFFF;font-weight:500;cursor:pointer}
+.adm-upload input:focus-visible + span{outline:2px solid #0B5F80;outline-offset:2px}
+.adm-imgs li{display:flex;align-items:center;gap:12px;padding:10px;border-radius:12px;background:#FFFFFF;border:1px solid #E6EAEE;font-size:14px}
+.adm-imgs img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+.adm-imgs li span{flex:1;display:flex;flex-direction:column}
+.adm-imgs small{color:#6A727E}
+.adm-achados li{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;background:#FFFFFF;border:1px solid #E6EAEE}
+.adm-achados small{color:#6A727E;font-size:12.5px}
+.adm-achados p{margin:4px 0 0;font-size:14px;line-height:1.5}
+.adm-achados mark{background:#FDECEA;color:#B3261E;padding:0 2px;border-radius:3px}
+.adm-passos{margin:0 0 10px;padding-left:22px;display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.5}
+
+@media (max-width:760px){
+  .adm-topo{gap:8px;padding:0 10px;padding-top:env(safe-area-inset-top);height:calc(56px + env(safe-area-inset-top))}
+  .adm-ola{font-size:14px}
+  .adm-corpo{flex-direction:column}
+  .adm-menu{width:auto;display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;padding:8px 10px;border-right:none;border-bottom:1px solid #E6EAEE;flex-shrink:0;scrollbar-width:none}
+  .adm-menu::-webkit-scrollbar{display:none}
+  .adm-grupo{flex-direction:row;align-items:center;margin:0;flex-shrink:0}
+  .adm-grupo-nome{padding:0 2px 0 0;font-size:10px}
+  .adm-item{white-space:nowrap;min-height:36px;font-size:14px}
+  .adm-main{padding:20px 14px calc(60px + env(safe-area-inset-bottom))}
+  .adm-cab h1{font-size:23px}
+  .adm-setup-grade{grid-template-columns:1fr}
+  .adm-qr{margin:0 auto}
+  .adm-form{padding:16px}
+}
+@media (prefers-reduced-motion:reduce){.adm-campo.erro{animation:none}}

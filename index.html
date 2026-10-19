@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aluísio — protótipo</title>
+<!-- Estilos (na ordem: cada arquivo pode ajustar o anterior) -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/palco.css">
+<link rel="stylesheet" href="css/notch.css">
+<link rel="stylesheet" href="css/capitulos.css">
+<link rel="stylesheet" href="css/orbita.css">
+<link rel="stylesheet" href="css/barra.css">
+<link rel="stylesheet" href="css/leque.css">
+<link rel="stylesheet" href="css/indicador.css">
+<link rel="stylesheet" href="css/conteudo.css">
+<link rel="stylesheet" href="css/celular.css">
+<link rel="stylesheet" href="css/movimento-reduzido.css">
+<link rel="stylesheet" href="css/indicador-seta.css">
+<!-- Intro (assinatura → bola → queda): arquivos próprios na pasta intro/ -->
+<!-- 19/10: painel administrativo — endereço secreto index.html#admin (ao entrar por ele a intro não roda e o site fica escondido) -->
+<script>if (location.hash === '#admin') { document.documentElement.classList.add('modo-admin'); try { sessionStorage.setItem('intro-vista', '1'); } catch (e) { /* nada */ } }</script>
+<link rel="stylesheet" href="admin/admin.css">
+<link rel="stylesheet" href="intro/intro.css">
+<script src="intro/intro.js"></script>
+<!-- Scripts: "defer" baixa tudo em paralelo e roda na ordem abaixo, depois que a página foi lida -->
+<script defer src="js/desenhos/icones.js"></script>
+<script defer src="js/desenhos/figuras.js"></script>
+<script defer src="js/desenhos/cenas.js"></script>
+<script defer src="js/conteudo/perfis.js"></script>
+<script defer src="js/conteudo/capitulos.js"></script>
+<script defer src="js/conteudo/posts.js"></script>
+<script defer src="js/app/estado.js"></script>
+<script defer src="js/app/barra.js"></script>
+<script defer src="js/app/leque.js"></script>
+<script defer src="js/app/perfis.js"></script>
+<script defer src="js/app/capitulos.js"></script>
+<script defer src="js/app/orbita.js"></script>
+<script defer src="js/app/post.js"></script>
+<script defer src="js/app/indicador.js"></script>
+<script defer src="js/app/avatar.js"></script>
+<script defer src="js/app/atualizar.js"></script>
+<script defer src="js/conteudo/trajetoria.js"></script>
+<script defer src="js/app/trajetoria.js"></script>
+<!-- 19/10: Projetos (câmera + grade) e Acervo (câmera + estante com livros) -->
+<script defer src="js/conteudo/projetos.js"></script>
+<script defer src="js/conteudo/cursos.js"></script>
+<script defer src="js/conteudo/acervo.js"></script>
+<script defer src="js/app/mock.js"></script>
+<script defer src="js/app/rolo.js"></script>
+<script defer src="js/app/camera.js"></script>
+<script defer src="js/app/projetos.js"></script>
+<script defer src="js/app/acervo.js"></script>
+<script defer src="js/app/voltar-topo.js"></script>
+<script defer src="js/desenhos/artes.js"></script>
+<script defer src="js/conteudo/mocks-perfis.js"></script>
+<script defer src="js/app/mocks-perfis.js"></script>
+<script defer src="js/app/filtros.js"></script>
+<script defer src="js/app/iniciar.js"></script>
+<!-- Painel administrativo (#admin) e app instalável (PWA) -->
+<script defer src="admin/config.js"></script>
+<script defer src="admin/totp.js"></script>
+<script defer src="admin/banco.js"></script>
+<script defer src="admin/vendor/qrcode.js"></script>
+<script defer src="admin/pwa.js"></script>
+<script defer src="admin/painel.js"></script>
+<link rel="stylesheet" href="css/trajetoria.css">
+<link rel="stylesheet" href="css/mock.css">
+<link rel="stylesheet" href="css/camera.css">
+<link rel="stylesheet" href="css/projetos.css">
+<link rel="stylesheet" href="css/acervo.css">
+<link rel="stylesheet" href="css/voltar-topo.css">
+<link rel="stylesheet" href="css/mocks-perfis.css">
+<link rel="stylesheet" href="css/filtros.css">
+</head>
+<body data-ind="q">
+<div id="raiz">
+  <div id="palco-tela">
+    <div class="palco">
+      <div class="cena" id="cena">
+        <div class="fundo-cap" id="fundo-cap" aria-hidden="true"></div>
+        <div class="sombra" aria-hidden="true"></div>
+        <div class="avatar-box">
+          <div class="avatar-btn" id="avatar" role="img" aria-label="Aluísio (perfil Profissional)">
+            <!-- Profissional: vídeo com fundo transparente (repouso em loop); a imagem parada aparece enquanto carrega,
+                 no Safari/iPhone (não mostram a transparência do WebM) e com "reduzir movimento" -->
+            <div class="avatar-midia" data-perfil="profissional">
+              <img class="avatar-pose" src="img/avatar/profissional_pose.webp" alt="" draggable="false">
+              <video class="avatar-video" muted loop playsinline preload="none" aria-hidden="true" disablepictureinpicture></video>
+            </div>
+            <svg data-perfil="religioso" viewBox="0 0 200 580" aria-hidden="true" hidden>
+              <ellipse cx="100" cy="50" rx="26" ry="32" fill="#D9D6CF"/><rect x="90" y="78" width="20" height="22" fill="#D9D6CF"/>
+              <path d="M52 104 L148 104 L140 332 L60 332 Z" fill="#A9A397"/><path d="M84 100 L116 100 L100 160 Z" fill="#FBFAF7"/>
+              <path d="M92 100 L108 100 L100 112 Z" fill="#E4E1DA"/>
+              <path d="M52 106 L66 114 L56 312 L36 308 Z" fill="#A9A397"/><path d="M148 106 L134 114 L144 312 L164 308 Z" fill="#A9A397"/>
+              <ellipse cx="46" cy="320" rx="10" ry="13" fill="#D9D6CF"/><ellipse cx="154" cy="320" rx="10" ry="13" fill="#D9D6CF"/>
+              <path d="M62 330 L98 330 L96 552 L70 552 Z" fill="#9E998E"/><path d="M102 330 L138 330 L130 552 L104 552 Z" fill="#9E998E"/>
+              <ellipse cx="80" cy="560" rx="21" ry="9" fill="#8A857A"/><ellipse cx="120" cy="560" rx="21" ry="9" fill="#8A857A"/>
+            </svg>
+            <svg data-perfil="pessoal" viewBox="0 0 200 580" aria-hidden="true" hidden>
+              <ellipse cx="100" cy="52" rx="26" ry="31" fill="#D9D6CF"/>
+              <path d="M72 44 Q74 14 100 14 Q126 14 128 44 Z" fill="#A9A397"/><path d="M118 40 L156 44 Q156 50 150 50 L118 47 Z" fill="#9E998E"/>
+              <rect x="90" y="79" width="20" height="22" fill="#D9D6CF"/>
+              <path d="M54 104 L146 104 L140 304 L60 304 Z" fill="#E2DED6"/>
+              <path d="M54 106 L40 166 L60 172 L68 124 Z" fill="#E2DED6"/><path d="M146 106 L160 166 L140 172 L132 124 Z" fill="#E2DED6"/>
+              <path d="M42 166 L58 170 L56 312 L38 308 Z" fill="#D9D6CF"/><path d="M158 166 L142 170 L144 312 L162 308 Z" fill="#D9D6CF"/>
+              <ellipse cx="46" cy="320" rx="10" ry="13" fill="#D9D6CF"/><ellipse cx="154" cy="320" rx="10" ry="13" fill="#D9D6CF"/>
+              <path d="M60 302 L98 302 L96 552 L70 552 Z" fill="#B9C0C6"/><path d="M102 302 L140 302 L130 552 L104 552 Z" fill="#B9C0C6"/>
+              <ellipse cx="80" cy="560" rx="22" ry="9" fill="#E9E6E0" stroke="#C9C5BC" stroke-width="2"/><ellipse cx="120" cy="560" rx="22" ry="9" fill="#E9E6E0" stroke="#C9C5BC" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+        <div class="orbita" id="orbita"></div>
+      </div>
+      <div class="info-esq" id="info-esq"></div>
+      <div class="info-dir" id="info-dir"></div>
+    </div>
+    <div class="conteudo" id="conteudo"></div>
+  </div>
+
+  <article class="post" id="post" hidden></article>
+</div>
+
+<div class="indicador-pos" id="indicador-pos">
+  <button type="button" class="ind ind-q foco" data-descer>
+    <span class="rab-texto">Role a página<svg class="rab-pilula" aria-hidden="true"><rect/></svg></span>
+    <span class="rabisco" style="width:44px;height:170px"><svg width="44" height="170" viewBox="0 0 44 170" aria-hidden="true"><defs><mask id="m-q" maskUnits="userSpaceOnUse" x="-10" y="-10" width="64" height="190"><path class="rab-mascara" pathLength="100" d="M18 4 C 52 30, -2 56, 22 80 C 26 86, 27 100, 27 160"/></mask></defs><path class="rab-pontos tracos" d="M18 4 C 52 30, -2 56, 22 80 C 26 86, 27 100, 27 160" mask="url(#m-q)"/></svg><span class="rab-ponta" aria-hidden="true" style="offset-path:path('M18 4 C 52 30, -2 56, 22 80 C 26 86, 27 100, 27 160')"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 2 L11 7 L2 12"/></svg></span></span>
+  </button>
+</div>
+
+
+<div class="wrap" id="wrap">
+  <div class="leque" id="leque"></div>
+  <div class="placa">
+    <button type="button" class="aba-topo" id="aba-topo" aria-expanded="true" aria-controls="barra" aria-label="Esconder a barra">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <nav class="barra" id="barra" aria-label="Navegação do perfil Profissional"></nav>
+    <button type="button" class="inicio-btn ativo" id="inicio" aria-pressed="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg>
+      <span>Início</span>
+    </button>
+  </div>
+</div>
+
+<div class="notch-wrap" id="notch-wrap">
+  <div class="notch-placa">
+    <nav class="notch" id="notch" aria-label="Perfis de Aluísio">
+      <button type="button" class="perfil-btn atual" data-perfil="profissional" aria-pressed="true" aria-label="Perfil Profissional" title="Profissional"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.8h8l-2.2 4.4h-3.6z"/><path d="M10.2 7.2 8.3 18.2 12 22l3.7-3.8-1.9-11"/><path class="acento" stroke-width="1.4" d="M11.3 7.8 9.8 17.8l2.1 2.2"/></svg></button>
+      <button type="button" class="perfil-btn" data-perfil="religioso" aria-pressed="false" aria-label="Perfil Religioso" title="Religioso"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5v19"/><path d="M6.8 7.8h10.4"/><path class="acento" stroke-width="1.4" d="M13.9 10v10"/></svg></button>
+      <button type="button" class="perfil-btn" data-perfil="pessoal" aria-pressed="false" aria-label="Perfil Pessoal" title="Pessoal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5.4V4.3h2v1.1"/><path d="M3.3 15.2C3.3 9 7 5.4 12 5.4c4.6 0 7.6 3 8.2 7.6"/><path d="M3.3 15.2c.2.8 3.5.9 6.2.1 4-1.3 7.8-3.3 10.9-.9 1.3 1 1.5 1.9.6 1.6-2.4-1-4.8.4-7.3 1.6-2.2 1-4.3 1-5.3-1.2"/><path class="acento" stroke-width="1.3" d="M12.4 5.5c-2.4 1.3-3.3 4.8-2.9 10.1"/><path class="acento" stroke-width="1.3" d="M11.6 17.2c2.6-.3 6-3.2 8.8-2"/></svg></button>
+    </nav>
+    <button type="button" class="aba-notch cheio" id="aba-notch" aria-expanded="true" aria-controls="notch" aria-label="Esconder os perfis"><span class="circulo" aria-hidden="true"></span></button>
+  </div>
+</div>
+
+</body>
+</html>
