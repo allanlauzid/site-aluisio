@@ -24,3 +24,15 @@ html,body{margin:0;background:var(--fundo)}
 body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--tinta);-webkit-tap-highlight-color:transparent}
 button{font:inherit}
 .foco:focus-visible,.barra-btn:focus-visible,.inicio-btn:focus-visible,.carta:focus-visible,.indicador:focus-visible{outline:2px solid var(--azul);outline-offset:3px}
+
+/* 20/10: barra de rolagem fina e discreta (cinza claro do avatar), sem relevo e sem azul.
+   scrollbar-gutter reserva o espaço da barra: a tela não é empurrada quando a rolagem aparece ou some.
+   Na intro e no painel #admin não há reserva (senão aparece uma faixa vazia na tela). */
+html{scrollbar-gutter:stable}
+html.intro-rodando,html.modo-admin{scrollbar-gutter:auto}
+html::-webkit-scrollbar{width:10px}
+html::-webkit-scrollbar-track{background:transparent}
+html::-webkit-scrollbar-thumb{background:#C9C5BC;background-clip:padding-box;border:2px solid transparent;border-radius:999px}
+html::-webkit-scrollbar-thumb:hover{background:#A9A397;background-clip:padding-box}
+/* Firefox só aceita cor e espessura */
+@supports not selector(::-webkit-scrollbar){html{scrollbar-color:#C9C5BC transparent;scrollbar-width:thin}}

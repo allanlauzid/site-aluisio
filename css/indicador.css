@@ -12,3 +12,8 @@
 @media (min-width:761px){
   .indicador-pos{left:calc(50% + var(--meia-barra, 220px) + 28px);bottom:calc(var(--barra) - 40px)}
 }
+/* 20/10: em telas largas o aviso fica perto da barra de rolagem (à direita); abaixo de 1200 px continua ao lado da barra de botões,
+   para não bater nas informações do lado direito do Aluísio */
+@media (min-width:1200px){
+  .indicador-pos{left:auto;right:24px}
+}
