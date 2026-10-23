@@ -132,4 +132,4 @@ html.modo-admin body{visibility:hidden}
   .adm-qr{margin:0 auto}
   .adm-form{padding:16px}
 }
-@media (prefers-reduced-motion:reduce){.adm-campo.erro{animation:none}}
+@media not all{.adm-campo.erro{animation:none}}

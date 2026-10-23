@@ -1,5 +1,5 @@
 /* Quem ativou "reduzir movimento" no sistema */
-@media (prefers-reduced-motion: reduce){
+@media not all{
   .barra-btn.afunda{animation:none;opacity:0}.barra-btn.emerge{animation:none}
   .carta,.cena,.info-item,.fundo-cap{transition:opacity 200ms ease !important}
   .notch-wrap{transition:none}

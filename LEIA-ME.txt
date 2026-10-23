@@ -81,3 +81,19 @@ Observações
 - App: manifest.webmanifest + sw.js + ícones em img/app/. Só funciona no site publicado (https). Instale a partir de /#admin:
   o app abre direto no painel. Visitantes comuns não veem a opção de instalar.
 - Arquivos: admin/{config,totp,banco,pwa,painel}.js, admin/admin.css, admin/vendor/qrcode.js (QR code, licença MIT, Kazuhiko Arase).
+
+21/10 - Seta para a barra de botoes
+- No fim da entrada (quando a barra de baixo termina de subir), uma seta pontilhada no estilo da "Role a pagina" e desenhada
+  da cauda ate a ponta, apontando para a barra (computador: vem do lado esquerdo; celular: arco curto que desce sobre o comeco da barra).
+- Some (apagando da cauda ate a ponta) no primeiro clique em qualquer botao da barra ou no Inicio; tambem some se a barra for escondida.
+  Aparece de novo so ao recarregar. Desenhos e posicao em js/app/seta-barra.js (DESENHOS); estilo em css/seta-barra.css.
+
+23/10 - Site mais leve (nada muda no que aparece)
+- Projetos, Acervo, Trajetoria e perfis Pessoal/Religioso agora so sao baixados quando a pessoa abre cada um (js/app/sob-demanda.js:
+  lista de arquivos de cada grupo no topo do arquivo). Arquivo novo dessas partes: acrescentar no grupo certo ali, NAO no index.html.
+- O painel #admin (admin/*.js e admin.css) so e baixado quando o endereco tem #admin; visitantes comuns nao baixam nada dele.
+  O bloco que faz isso esta no index.html (comentario "Painel administrativo").
+- O video do avatar so comeca a baixar quando a bola da intro comeca a cair (intro.js: INTRO.aoCair).
+- Imagens: 9 posts em WebP (js/conteudo/posts.js), icones do Contato em 144 px, video e imagem do avatar recomprimidos.
+- "Reduzir movimento" do sistema foi desligado em todo o site (blocos @media viraram "not all" e matchMedia('not all')).
+- Copia da pasta antes destas mudancas: ..\_bkp_leveza (e ..\_bkp_reduzir_movimento para a parte do "reduzir movimento").

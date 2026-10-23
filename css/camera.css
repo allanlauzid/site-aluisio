@@ -35,4 +35,4 @@
   .janela h2{font-size:25px}
   .janela p{font-size:16px}
 }
-@media (prefers-reduced-motion:reduce){.janela{animation:none}}
+@media not all{.janela{animation:none}}

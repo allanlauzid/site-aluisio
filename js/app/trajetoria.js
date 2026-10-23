@@ -1,6 +1,6 @@
 // Comportamento isolado do mock de Trajetória. Sem módulos nem rede.
 const Trajetoria = (() => {
-  let camada,espaco,modal,raf=0,ativo=false,ultimo=0,fase=0,indice=-1,pontos=[],total=0,inicio=0,extensao=1,w=0,h=0,anterior=0,alturaTexto=0,retorno=null,overflow='',media=matchMedia('(prefers-reduced-motion: reduce)');
+  let camada,espaco,modal,raf=0,ativo=false,ultimo=0,fase=0,indice=-1,pontos=[],total=0,inicio=0,extensao=1,w=0,h=0,anterior=0,alturaTexto=0,retorno=null,overflow='',media=matchMedia('not all');
   const esc = s => String(s || '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const caminho='M 120 310 C 1000 310 1200 310 1900 310 S 2900 180 3600 210 S 4700 360 5600 310 S 6700 210 7600 250 S 9000 380 10300 310 S 11600 200 12600 250 S 14000 310 15100 310';
   const temas=['indústria','finanças','ensino','gestão','estratégia','educação digital','formação contínua'];

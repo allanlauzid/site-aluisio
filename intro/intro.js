@@ -15,19 +15,24 @@
   const ESPERA_INICIAL = 400, PAUSA_ANTES_DE_CAIR = 260; // ms
   const GRAVIDADE = 4200;  // px/s² — queda com aceleração constante (y = t²)
 
-  const callbacks = [];
-  let terminou = false;
-  const SEM_MOVIMENTO = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const callbacks = [], callbacksCair = [];
+  let terminou = false, caiu = false;
+  // 23/10: avisa quando a bola começa a cair (ou na hora, se a intro não roda). O vídeo do avatar só começa a baixar aqui:
+  // durante a escrita da assinatura a conexão fica livre para o que o site precisa para aparecer.
+  function avisarQueda() { if (caiu) return; caiu = true; callbacksCair.splice(0).forEach((fn) => fn()); }
+  const SEM_MOVIMENTO = window.matchMedia && window.matchMedia('not all').matches;
   let jaViu = false;
   try { jaViu = sessionStorage.getItem('intro-vista') === '1'; } catch (e) { /* sem acesso ao armazenamento: roda a intro */ }
   const ativa = !SEM_MOVIMENTO && !jaViu;
   window.INTRO = {
     ativa,
-    aoTerminar(fn) { if (terminou) fn(); else callbacks.push(fn); }
+    aoTerminar(fn) { if (terminou) fn(); else callbacks.push(fn); },
+    aoCair(fn) { if (caiu || !ativa) fn(); else callbacksCair.push(fn); }
   };
   function terminar() {
     if (terminou) return;
     terminou = true;
+    avisarQueda();
     document.documentElement.classList.remove('intro-rodando');
     const el = document.getElementById('intro');
     if (el) el.remove();
@@ -102,6 +107,7 @@
       requestAnimationFrame(quadro);
     }
     function cair() {
+      avisarQueda();
       // troca o círculo recortado por uma bola de verdade, no mesmo lugar e tamanho
       const c = circulo(), D = 2 * c.raio, bola = el.querySelector('.intro-bola');
       Object.assign(bola.style, { width: D + 'px', height: D + 'px', left: (c.cx - D / 2) + 'px', top: (c.cy - D / 2) + 'px' });

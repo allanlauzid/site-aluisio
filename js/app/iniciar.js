@@ -43,6 +43,8 @@ atualizar();
       clearTimeout(t1); clearTimeout(t2); soltar();
       if (!S.mexeuNotch && notchAberto) alternarNotch();
       if (!S.mexeuBarra && S.barraOculta) alternarBarra();
+      // 21/10: quando a barra termina de subir (560 ms), a seta que aponta para ela é desenhada
+      setTimeout(() => SETA_BARRA.mostrar(), 620);
     };
     const t2 = setTimeout(final, 1000 + 520 + ABERTO);
     const pular = (e) => { if (e.target && e.target.closest && e.target.closest('#notch-wrap, #wrap')) return; final(); };

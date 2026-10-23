@@ -145,7 +145,7 @@ html.mp-travado,html.mp-travado body{overflow:hidden}
   .mp-modal-foto .mp-seta{top:auto;bottom:62px;width:40px;height:40px}
   .mp-esboco{padding:24px 20px}
 }
-@media (prefers-reduced-motion:reduce){
+@media not all{
   .mp-foto .arte,.mp-tela .arte{transition:none}
   .mp-tela.tocando .arte{transform:none}
 }

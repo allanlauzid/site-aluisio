@@ -18,7 +18,7 @@ function itemInfo(it, i) {
 }
 
 // Letreiro de aeroporto (só as letras): cada letra gira por caracteres sorteados e para na certa, da esquerda para a direita
-const SEM_MOVIMENTO = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const SEM_MOVIMENTO = window.matchMedia && window.matchMedia('not all').matches;
 const LETRAS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÇÃÁÉÍÓÚÊ0123456789';
 let tLetreiro = [];
 function pararLetreiros() { tLetreiro.forEach((t) => { clearTimeout(t); clearInterval(t); }); tLetreiro = []; }
@@ -56,10 +56,18 @@ function trocarFundo(c) {
   }, estava ? 300 : 0);
 }
 
+// 23/10: Projetos, Acervo, Trajetória e perfis Pessoal/Religioso são baixados só quando abertos (js/app/sob-demanda.js).
+// Enquanto o módulo não chegou, "typeof" evita erro; "vezMontagem" descarta a montagem se a pessoa já trocou de capítulo.
+let vezMontagem = 0;
+function comModulo(grupo, vez, montar) {
+  $('conteudo').innerHTML = '';
+  SOB_DEMANDA.carregar(grupo).then(() => { if (vez === vezMontagem) montar(); }).catch(() => { /* sem rede: o capítulo fica só com o fundo */ });
+}
 function montarCapitulo() {
-  Trajetoria.parar();
-  Camera.parar();
-  MocksPerfis.parar();
+  const vez = ++vezMontagem;
+  if (typeof Trajetoria !== 'undefined') Trajetoria.parar();
+  if (typeof Camera !== 'undefined') Camera.parar();
+  if (typeof MocksPerfis !== 'undefined') MocksPerfis.parar();
   const c = S.ativo ? CAPITULOS[S.ativo] : null;
   pararLetreiros();
   trocarFundo(c);
@@ -81,10 +89,10 @@ function montarCapitulo() {
   const cont = $('conteudo');
   if (!c) { cont.innerHTML = ''; return; }
   if (c.feed) { montarFeed(); return; }
-  if (S.ativo === 'trajetoria') { Trajetoria.montar(); return; }
-  if (S.ativo === 'projetos') { Projetos.montar(); return; }
-  if (S.ativo === 'acervo') { Acervo.montar(); return; }
-  if (c.mock) { MocksPerfis.montar(c); return; }  // 19/10: telas de exemplo dos perfis Pessoal e Religioso
+  if (S.ativo === 'trajetoria') { comModulo('trajetoria', vez, () => Trajetoria.montar()); return; }
+  if (S.ativo === 'projetos') { comModulo('projetos', vez, () => Projetos.montar()); return; }
+  if (S.ativo === 'acervo') { comModulo('acervo', vez, () => Acervo.montar()); return; }
+  if (c.mock) { comModulo('mocks', vez, () => MocksPerfis.montar(c)); return; }  // 19/10: telas de exemplo dos perfis Pessoal e Religioso
   if (!c.marcador) { cont.innerHTML = '<section class="marcador-sec" aria-hidden="true"></section>'; return; }
   const linhas = c.marcador[2] || [];
   cont.innerHTML = '<section class="marcador-sec"><div class="marcador"><div class="marcador-tit">' + c.marcador[0] + '</div><p>' + c.marcador[1] + '</p>' +

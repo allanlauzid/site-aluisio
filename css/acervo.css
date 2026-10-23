@@ -77,4 +77,4 @@
   .grupo-nome{font-size:9.5px}
   .estante-linha::after{left:30px;right:30px}
 }
-@media (prefers-reduced-motion:reduce){.livro{transition:opacity 200ms ease;transform:none}}
+@media not all{.livro{transition:opacity 200ms ease;transform:none}}

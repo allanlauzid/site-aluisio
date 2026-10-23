@@ -3,6 +3,7 @@
 // - Telas de até 760 px usam a versão menor (_m); computador usa a maior.
 // - Safari e iPhone/iPad não mostram a transparência do WebM: ficam com a imagem parada.
 // - "Reduzir movimento": só a imagem parada.
+// - O vídeo só começa a baixar quando a bola da intro começa a cair (sem intro: na hora).
 // - O vídeo pausa quando a aba está escondida, numa página de post ou em outro perfil.
 
 const AVATAR_VIDEO = {
@@ -20,10 +21,11 @@ document.querySelectorAll('.avatar-midia').forEach((m) => {
   m.querySelector('.avatar-pose').src = telaPequena() ? cfg.poseP : cfg.pose;
   const v = m.querySelector('.avatar-video');
   if (!USA_VIDEO) { v.remove(); return; }
-  v.src = telaPequena() ? cfg.pequeno : cfg.grande;
-  v.preload = 'auto';
   v.addEventListener('playing', () => m.classList.add('tocando'));
   v.addEventListener('error', () => { m.classList.remove('tocando'); v.remove(); });
+  // 23/10: o vídeo só começa a baixar quando a intro termina de escrever (a imagem parada aparece nesse meio-tempo); sem intro, começa na hora
+  const comecar = () => { v.src = telaPequena() ? cfg.pequeno : cfg.grande; v.preload = 'auto'; atualizarVideo(); };
+  if (window.INTRO && window.INTRO.aoCair) window.INTRO.aoCair(comecar); else comecar();
 });
 
 function atualizarVideo() {

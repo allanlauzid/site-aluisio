@@ -20,7 +20,6 @@
 <!-- Intro (assinatura → bola → queda): arquivos próprios na pasta intro/ -->
 <!-- 19/10: painel administrativo — endereço secreto index.html#admin (ao entrar por ele a intro não roda e o site fica escondido) -->
 <script>if (location.hash === '#admin') { document.documentElement.classList.add('modo-admin'); try { sessionStorage.setItem('intro-vista', '1'); } catch (e) { /* nada */ } }</script>
-<link rel="stylesheet" href="admin/admin.css">
 <link rel="stylesheet" href="intro/intro.css">
 <script src="intro/intro.js"></script>
 <!-- Scripts: "defer" baixa tudo em paralelo e roda na ordem abaixo, depois que a página foi lida -->
@@ -34,36 +33,47 @@
 <script defer src="js/app/barra.js"></script>
 <script defer src="js/app/leque.js"></script>
 <script defer src="js/app/perfis.js"></script>
+<!-- 23/10: Projetos, Acervo, Trajetória e perfis Pessoal/Religioso só são baixados quando abertos (ver js/app/sob-demanda.js) -->
+<script defer src="js/app/sob-demanda.js"></script>
 <script defer src="js/app/capitulos.js"></script>
 <script defer src="js/app/orbita.js"></script>
 <script defer src="js/app/post.js"></script>
 <script defer src="js/app/indicador.js"></script>
 <script defer src="js/app/avatar.js"></script>
 <script defer src="js/app/atualizar.js"></script>
-<script defer src="js/conteudo/trajetoria.js"></script>
-<script defer src="js/app/trajetoria.js"></script>
 <!-- 19/10: Projetos (câmera + grade) e Acervo (câmera + estante com livros) -->
-<script defer src="js/conteudo/projetos.js"></script>
-<script defer src="js/conteudo/cursos.js"></script>
-<script defer src="js/conteudo/acervo.js"></script>
 <script defer src="js/app/mock.js"></script>
-<script defer src="js/app/rolo.js"></script>
-<script defer src="js/app/camera.js"></script>
-<script defer src="js/app/projetos.js"></script>
-<script defer src="js/app/acervo.js"></script>
 <script defer src="js/app/voltar-topo.js"></script>
-<script defer src="js/desenhos/artes.js"></script>
-<script defer src="js/conteudo/mocks-perfis.js"></script>
-<script defer src="js/app/mocks-perfis.js"></script>
 <script defer src="js/app/filtros.js"></script>
+<!-- 21/10: seta pontilhada que aponta para a barra no fim da entrada -->
+<script defer src="js/app/seta-barra.js"></script>
 <script defer src="js/app/iniciar.js"></script>
-<!-- Painel administrativo (#admin) e app instalável (PWA) -->
-<script defer src="admin/config.js"></script>
-<script defer src="admin/totp.js"></script>
-<script defer src="admin/banco.js"></script>
-<script defer src="admin/vendor/qrcode.js"></script>
-<script defer src="admin/pwa.js"></script>
-<script defer src="admin/painel.js"></script>
+<!-- Painel administrativo (#admin) e app instalável (PWA): 23/10 — só é baixado quando o endereço tem #admin (visitantes comuns não baixam nada disto).
+     Antes do painel, carrega também os textos de Projetos, Acervo, Trajetória e perfis, que ele lista e edita. -->
+<script>
+(function () {
+  var pedido = false;
+  var ARQUIVOS = ['admin/config.js', 'admin/totp.js', 'admin/banco.js', 'admin/vendor/qrcode.js', 'admin/pwa.js', 'admin/painel.js'];
+  function estilo() { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'admin/admin.css'; document.head.appendChild(l); }
+  function carregarAdmin() {
+    if (pedido) return; pedido = true;
+    var antes = (typeof SOB_DEMANDA !== 'undefined' ? SOB_DEMANDA.carregarTudo() : Promise.resolve());
+    antes.catch(function () { /* segue mesmo assim */ }).then(function () {
+      ARQUIVOS.forEach(function (src) { var s = document.createElement('script'); s.src = src; s.async = false; document.head.appendChild(s); });
+    });
+  }
+  // Entrando direto por #admin: o estilo vem junto com a página (bloqueia a pintura), então o site nunca "pisca" antes do painel
+  var estiloJa = false;
+  if (location.hash === '#admin') { document.write('<link rel="stylesheet" href="admin/admin.css">'); estiloJa = true; }
+  function conferir() {
+    if (location.hash !== '#admin') return;
+    if (!estiloJa) { estilo(); estiloJa = true; }
+    carregarAdmin();
+  }
+  window.addEventListener('hashchange', conferir);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', conferir); else conferir();
+})();
+</script>
 <link rel="stylesheet" href="css/trajetoria.css">
 <link rel="stylesheet" href="css/mock.css">
 <link rel="stylesheet" href="css/camera.css">
@@ -72,6 +82,7 @@
 <link rel="stylesheet" href="css/voltar-topo.css">
 <link rel="stylesheet" href="css/mocks-perfis.css">
 <link rel="stylesheet" href="css/filtros.css">
+<link rel="stylesheet" href="css/seta-barra.css">
 </head>
 <body data-ind="q">
 <div id="raiz">

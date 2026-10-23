@@ -5,4 +5,4 @@
 .voltar-topo:hover{background:#2BA9DA}
 .voltar-topo:active{box-shadow:inset 3px 3px 8px rgba(11,95,128,.4)}
 @media (max-width:760px){.voltar-topo{top:14px;right:14px;width:40px;height:40px}}
-@media (prefers-reduced-motion:reduce){.voltar-topo{transition:opacity 200ms ease;transform:none}}
+@media not all{.voltar-topo{transition:opacity 200ms ease;transform:none}}

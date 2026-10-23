@@ -45,6 +45,6 @@
  .traj-status{left:5%;right:5%;bottom:3%;gap:4px;font-size:10px}.traj-status button{padding:5px}
  .traj-modal-interior{padding:86px 23px 50px}.traj-modal h2{font-size:26px}
 }
-@media(prefers-reduced-motion:reduce){
+@media not all{
  .traj-espaco{height:auto}.traj-camada{display:none}.traj-estatica{position:relative;z-index:5;background:white;padding:40px 7%;max-width:900px;margin:auto}.traj-estatica article{padding:28px 0;border-bottom:1px solid #dcd8d0}.traj-estatica h2{font-size:23px}.traj-estatica button{min-height:44px;border:1px solid #dcd8d0;border-radius:25px;background:white;padding:9px 18px;color:#0b5f80}
 }

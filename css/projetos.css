@@ -43,4 +43,4 @@
   .proj-painel-fig{width:54px;height:54px}.proj-painel-fig svg{width:26px;height:26px}
   .proj-pal .letreiro{font-size:20px}
 }
-@media (prefers-reduced-motion:reduce){.proj-card{transition:opacity 200ms ease;transform:none}}
+@media not all{.proj-card{transition:opacity 200ms ease;transform:none}}
